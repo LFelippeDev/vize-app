@@ -1,25 +1,24 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Auth } from './pages/Auth';
+import { Register } from './pages/Register';
+import { ThemeProvider } from '@emotion/react';
+import { theme } from './styles/themes';
+import './styles/App.css';
+import 'react-toastify/dist/ReactToastify.css';
+import { ProtectedRoute } from './hooks/useProtectedRoute';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={theme}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/login" element={<Auth />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/users" element={<ProtectedRoute />} />
+          <Route path="*" element={<Auth />} />
+        </Routes>
+      </BrowserRouter>
+    </ThemeProvider>
   );
 }
 

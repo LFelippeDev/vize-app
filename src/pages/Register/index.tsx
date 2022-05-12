@@ -40,7 +40,7 @@ export const Register = () => {
         return;
       }
 
-      const response = await RequestsUser.login(register);
+      const response = await RequestsUser.register(register);
 
       if (
         response.message ===

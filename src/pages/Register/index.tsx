@@ -25,12 +25,21 @@ export const Register = () => {
   const handleSubmit = useCallback(
     async (event: FormEvent) => {
       if (!register) return;
-
-      if (registerError.email) toast.error('Esse email não é válido!');
-      if (registerError.password) toast.error('A senha deve ter 6 digitos!');
-      if (registerError.name) toast.error('O nome deve ser preenchido!');
-
       event.preventDefault();
+
+      if (registerError.email) {
+        toast.error('Esse email não é válido!');
+        return;
+      }
+      if (registerError.password) {
+        toast.error('A senha deve ter 6 digitos!');
+        return;
+      }
+      if (registerError.name) {
+        toast.error('O nome deve ser preenchido!');
+        return;
+      }
+
       const response = await RequestsUser.login(register);
 
       if (

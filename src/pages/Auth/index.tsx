@@ -20,11 +20,17 @@ export const Auth = () => {
   const handleSubmit = useCallback(
     async (event: FormEvent) => {
       if (!auth) return;
-
-      if (authError.email) toast.error('Esse email não é válido!');
-      if (authError.password) toast.error('A senha deve ter 6 digitos!');
-
       event.preventDefault();
+
+      if (authError.email) {
+        toast.error('Esse email não é válido!');
+        return;
+      }
+      if (authError.password) {
+        toast.error('A senha deve ter 6 digitos!');
+        return;
+      }
+
       const response = await RequestsUser.login(auth);
 
       if (response.message === 'invalid username or password') {
